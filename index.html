@@ -7,27 +7,25 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding-bottom: 200px;
+            padding: 20px;
+            padding-bottom: 250px;
         }
         .container {
             max-width: 600px;
             margin: 0 auto;
             background: white;
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         .header {
             background: linear-gradient(135deg, #FF5722, #FF9800);
             color: white;
             padding: 30px 20px;
             text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            border-radius: 20px 20px 0 0;
         }
         .header h1 { font-size: 28px; margin-bottom: 10px; }
         .location-badge {
@@ -42,85 +40,64 @@
         .search-box {
             padding: 15px 20px;
             background: #f5f5f5;
-            border-bottom: 2px solid #eee;
-            position: sticky;
-            top: 120px;
-            z-index: 99;
         }
         .search-input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 12px;
             border: 2px solid #ddd;
             border-radius: 25px;
             font-size: 15px;
-            outline: none;
-        }
-        .search-input:focus {
-            border-color: #667eea;
         }
         .menu-section {
             padding: 20px;
-            max-height: calc(100vh - 400px);
+            max-height: 60vh;
             overflow-y: auto;
         }
         .category-title {
             background: #4CAF50;
             color: white;
             padding: 12px 15px;
-            margin: 20px 0 10px 0;
+            margin: 15px 0 10px 0;
             border-radius: 8px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
-            position: sticky;
-            top: 0;
-            z-index: 10;
         }
         .menu-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
+            padding: 12px;
             border-bottom: 1px solid #eee;
-            transition: background 0.3s;
         }
-        .menu-item:hover { background: #f5f5f5; }
-        .item-info { flex: 1; }
         .item-name {
-            font-size: 15px;
-            font-weight: 500;
+            flex: 1;
+            font-size: 14px;
             color: #333;
         }
         .item-price {
             color: #FF5722;
             font-weight: bold;
-            font-size: 16px;
-            margin-right: 15px;
+            margin: 0 10px;
         }
-        .quantity-control {
+        .qty-controls {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .qty-btn {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border: none;
             background: #667eea;
             color: white;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-        .qty-btn:hover {
-            background: #764ba2;
-            transform: scale(1.1);
         }
         .qty-display {
-            width: 40px;
+            width: 30px;
             text-align: center;
             font-weight: bold;
-            font-size: 16px;
         }
         .cart-summary {
             position: fixed;
@@ -134,42 +111,34 @@
             max-width: 600px;
             margin: 0 auto;
         }
+        .notes-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
         .cart-total {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 15px;
-            font-size: 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
             font-weight: bold;
         }
         .order-btn {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(135deg, #4CAF50, #45a049);
+            background: #4CAF50;
             color: white;
             border: none;
             border-radius: 10px;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-        .order-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
         }
         .order-btn:disabled {
             background: #ccc;
-            cursor: not-allowed;
-        }
-        .notes-input {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            resize: vertical;
-            min-height: 60px;
-            margin-bottom: 15px;
         }
         .modal {
             display: none;
@@ -188,12 +157,10 @@
             padding: 40px;
             border-radius: 20px;
             text-align: center;
-            max-width: 400px;
         }
         .success-icon {
             font-size: 60px;
             color: #4CAF50;
-            margin-bottom: 20px;
         }
         .modal-btn {
             padding: 12px 30px;
@@ -201,17 +168,8 @@
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
             margin-top: 20px;
-        }
-        .item-count {
-            background: #FF5722;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 14px;
-            margin-left: 10px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -222,177 +180,168 @@
             <div class="location-badge" id="locationBadge">Loading...</div>
         </div>
         <div class="search-box">
-            <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search menu items...">
+            <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search menu...">
         </div>
-        <div class="menu-section" id="menuSection"></div>
+        <div class="menu-section" id="menuSection">
+            <p style="text-align: center; padding: 20px;">Loading menu...</p>
+        </div>
     </div>
+    
     <div class="cart-summary">
-        <textarea class="notes-input" id="customerNotes" placeholder="Special instructions (optional)..."></textarea>
+        <textarea class="notes-input" id="notes" placeholder="Special instructions..."></textarea>
         <div class="cart-total">
-            <span>Total: <span class="item-count" id="itemCount">0 items</span></span>
+            <span>Total (<span id="itemCount">0</span> items):</span>
             <span id="totalAmount">₹0</span>
         </div>
-        <button class="order-btn" id="placeOrderBtn" onclick="placeOrder()" disabled>Place Order</button>
+        <button class="order-btn" id="orderBtn" onclick="placeOrder()" disabled>Place Order</button>
     </div>
-    <div class="modal" id="successModal">
+    
+    <div class="modal" id="modal">
         <div class="modal-content">
             <div class="success-icon">✓</div>
             <h2>Order Placed!</h2>
-            <p>Your order has been sent to the kitchen.</p>
-            <p id="orderIdText"></p>
-            <button class="modal-btn" onclick="resetOrder()">Place Another Order</button>
+            <p id="orderId"></p>
+            <button class="modal-btn" onclick="resetOrder()">New Order</button>
         </div>
     </div>
+
     <script>
-        let cart = {}, location = '', menuData = [], allMenuItems = [];
-        
-        // Complete menu data embedded
-        const MENU = [
-            ["Breakfast","Tandoori Prantha","60"],["Breakfast","Laccha Parantha","30"],["Breakfast","Masala Laccha Parantha","60"],["Breakfast","Laal Mirch Parantha","60"],["Breakfast","Aaloo Parantha","60"],["Breakfast","Pyaz Parantha","60"],["Breakfast","Gobhi Parantha","60"],["Breakfast","Paneer Parantha","80"],["Breakfast","Mix Parantha","80"],["Breakfast","Plain Parantha","20"],["Breakfast","Aaloo Pyaz Parantha","60"],["Breakfast","Gobhi Pyaz Parantha","60"],["Breakfast","Aaloo Methi Parantha","60"],["Breakfast","Paneer Pyaz Parantha","80"],["Breakfast","Aaloo Pyaz Paneer Parantha","80"],["Breakfast","Methi Prantha","60"],["Breakfast","Mooli Prantha","60"],["Breakfast","Veg Sandwich","120"],["Breakfast","Grilled Sandwich","150"],["Breakfast","Butter Toast","80"],["Breakfast","Bread Toast","80"],["Breakfast","Bread Omlette","150"],["Breakfast","Bread Pakoda","150"],["Breakfast","Poha","120"],["Breakfast","Pudi Bhaji","150"],["Breakfast","Pasta","150"],["Breakfast","Creamy Cheese Pasta","180"],["Breakfast","Red Olive Pasta","150"],["Breakfast","Masala Omlette","150"],["Breakfast","Boiled Egg","50"],["Breakfast","Maggie","100"],["Breakfast","Chole Bhature","150"],
+        const menu = [
+            ["Breakfast","Tandoori Prantha","60"],["Breakfast","Laccha Parantha","30"],["Breakfast","Masala Laccha Parantha","60"],["Breakfast","Aaloo Parantha","60"],["Breakfast","Pyaz Parantha","60"],["Breakfast","Gobhi Parantha","60"],["Breakfast","Paneer Parantha","80"],["Breakfast","Mix Parantha","80"],["Breakfast","Plain Parantha","20"],["Breakfast","Veg Sandwich","120"],["Breakfast","Grilled Sandwich","150"],["Breakfast","Butter Toast","80"],["Breakfast","Bread Omlette","150"],["Breakfast","Poha","120"],["Breakfast","Pasta","150"],["Breakfast","Masala Omlette","150"],["Breakfast","Boiled Egg","50"],["Breakfast","Maggie","100"],["Breakfast","Chole Bhature","150"],
             ["Beverages","Coffee","50"],["Beverages","Black Tea","30"],["Beverages","Green Tea","30"],["Beverages","Milk Tea","30"],["Beverages","Lemon Tea","30"],["Beverages","Cold Coffee","80"],
-            ["Starters (Veg)","Peanut Masala","150"],["Starters (Veg)","Crispy Corn","199"],["Starters (Veg)","Hara Bhara Kebab","199"],["Starters (Veg)","Chilli Potato","180"],["Starters (Veg)","Honey Chilli Potato","199"],["Starters (Veg)","Veg Manchurian","199"],["Starters (Veg)","Chilli Paneer","250"],["Starters (Veg)","Finger Chips","150"],["Starters (Veg)","Egg Bhuji (2 Pcs)","150"],["Starters (Veg)","Masala Papad (1 Pc)","60"],["Starters (Veg)","Plain Papad (1 Pc)","20"],["Starters (Veg)","Aaloo Chat","199"],["Starters (Veg)","Roasted Peanut","150"],["Starters (Veg)","Mix Pakoda","250"],["Starters (Veg)","Paneer Pakora","250"],["Starters (Veg)","Crispy Paneer","250"],["Starters (Veg)","Chana Masala","150"],["Starters (Veg)","Egg Fry (2 Pcs)","150"],["Starters (Veg)","Sweet Corn","180"],["Starters (Veg)","Masala French Fries","180"],["Starters (Veg)","Paneer Manchurian","250"],["Starters (Veg)","Gobi Manchurian","250"],["Starters (Veg)","Spring Roll","199"],["Starters (Veg)","Potato Rolls","199"],["Starters (Veg)","Dahi Ke Sholey","250"],["Starters (Veg)","Paneer 65","250"],["Starters (Veg)","Chili Baby Corn","250"],["Starters (Veg)","Cheese Balls","250"],
-            ["Drinks","Red Bull","200"],["Drinks","Water Bottle","30"],["Drinks","Lemon Water","50"],["Drinks","Ozito Water","80"],["Drinks","Sipp","100"],["Drinks","Caffine Shot","100"],["Drinks","Soda","50"],["Drinks","Cold Drinks","50"],
-            ["Tandoori (Veg)","Garlic Potato Shots","399"],["Tandoori (Veg)","Masala Chaap","399"],["Tandoori (Veg)","Malai Chaap","399"],["Tandoori (Veg)","Tandoori Chaap","399"],["Tandoori (Veg)","Mushroom Tikka","399"],["Tandoori (Veg)","Paneer Tikka","399"],["Tandoori (Veg)","Afghani Chaap","399"],["Tandoori (Veg)","Pahadi Chaap","299"],["Tandoori (Veg)","Rajma Kabab","299"],["Tandoori (Veg)","Palak Channa Kabaab","350"],["Tandoori (Veg)","Veg Seekh Kabaab","350"],["Tandoori (Veg)","Lehsooni Paneer Tikka","399"],["Tandoori (Veg)","Achari Paneer Tikka","299"],["Tandoori (Veg)","Malai Paneer Tikka","350"],["Tandoori (Veg)","Afghani Paneer Tikka","199"],["Tandoori (Veg)","Malai Mushroom","250"],
-            ["Tandoori (Non-Veg)","Lehsooni Chicken Tikka","150"],["Tandoori (Non-Veg)","Kastoori Chicken Tikka","250"],["Tandoori (Non-Veg)","Afghani Chicken Tikka","280"],["Tandoori (Non-Veg)","Pahadi Chicken Tikka","280"],["Tandoori (Non-Veg)","Malai Chicken Tikka","250"],["Tandoori (Non-Veg)","Malai Chicken Kabaab","250"],["Tandoori (Non-Veg)","Tandoori Chicken","250"],["Tandoori (Non-Veg)","Chicken Seekh","250"],["Tandoori (Non-Veg)","Chilly Chicken","250"],["Tandoori (Non-Veg)","Chicken Pakoda","250"],["Tandoori (Non-Veg)","Chilly Garlic Chicken","250"],["Tandoori (Non-Veg)","Chicken Fry","250"],["Tandoori (Non-Veg)","Chicken Manchurian","250"],["Tandoori (Non-Veg)","Schezwan Chilly Chicken","250"],
-            ["Noodles","Veg Noodles","180"],["Noodles","Egg Noodles","180"],["Noodles","Chicken Noodles","180"],["Noodles","Chowmein","180"],["Noodles","Hakka Noodles","180"],["Noodles","Chilli Garlic Noodles","180"],["Noodles","Chilli Paneer Noodles","250"],["Noodles","Schezwan Noodles","200"],["Noodles","Chicken Hakka Noodles","250"],["Noodles","Chicken Chili Garlic Noodles","250"],["Noodles","Chicken Schezwan Noodles","250"],["Noodles","Chicken Manchurian Noodles","250"],
+            ["Starters (Veg)","Peanut Masala","150"],["Starters (Veg)","Crispy Corn","199"],["Starters (Veg)","Hara Bhara Kebab","199"],["Starters (Veg)","Chilli Potato","180"],["Starters (Veg)","Honey Chilli Potato","199"],["Starters (Veg)","Veg Manchurian","199"],["Starters (Veg)","Chilli Paneer","250"],["Starters (Veg)","Finger Chips","150"],["Starters (Veg)","Masala Papad","60"],["Starters (Veg)","Plain Papad","20"],["Starters (Veg)","Aaloo Chat","199"],["Starters (Veg)","Mix Pakoda","250"],["Starters (Veg)","Paneer Pakora","250"],["Starters (Veg)","Spring Roll","199"],["Starters (Veg)","Paneer 65","250"],["Starters (Veg)","Cheese Balls","250"],
+            ["Drinks","Red Bull","200"],["Drinks","Water Bottle","30"],["Drinks","Lemon Water","50"],["Drinks","Soda","50"],["Drinks","Cold Drinks","50"],
+            ["Tandoori (Veg)","Masala Chaap","399"],["Tandoori (Veg)","Malai Chaap","399"],["Tandoori (Veg)","Tandoori Chaap","399"],["Tandoori (Veg)","Mushroom Tikka","399"],["Tandoori (Veg)","Paneer Tikka","399"],["Tandoori (Veg)","Afghani Chaap","399"],["Tandoori (Veg)","Pahadi Chaap","299"],
+            ["Tandoori (Non-Veg)","Chicken Tikka","250"],["Tandoori (Non-Veg)","Malai Chicken Tikka","250"],["Tandoori (Non-Veg)","Tandoori Chicken","250"],["Tandoori (Non-Veg)","Chicken Seekh","250"],["Tandoori (Non-Veg)","Chilly Chicken","250"],["Tandoori (Non-Veg)","Chicken Pakoda","250"],
+            ["Noodles","Veg Noodles","180"],["Noodles","Egg Noodles","180"],["Noodles","Chicken Noodles","180"],["Noodles","Hakka Noodles","180"],["Noodles","Schezwan Noodles","200"],
             ["Sandwiches","Cheese Corn Sandwich","150"],["Sandwiches","Veg Masala Sandwich","150"],["Sandwiches","Paneer Masala Sandwich","150"],
-            ["Combos","Manchurian Gravy + Fried Rice","300"],["Combos","Spring Rolls + Fried Rice","300"],
-            ["Main Course (Veg)","Tawa Chaap Masala (Half)","150"],["Main Course (Veg)","Tawa Chaap Masala (Full)","250"],["Main Course (Veg)","Dal Makhani (Half)","150"],["Main Course (Veg)","Dal Makhani (Full)","250"],["Main Course (Veg)","Dal Fry (Half)","120"],["Main Course (Veg)","Dal Fry (Full)","200"],["Main Course (Veg)","Mix Veg (Half)","150"],["Main Course (Veg)","Mix Veg (Full)","200"],["Main Course (Veg)","Aaloo Gobhi (Half)","150"],["Main Course (Veg)","Aaloo Gobhi (Full)","200"],["Main Course (Veg)","Dal Tadka (Half)","150"],["Main Course (Veg)","Dal Tadka (Full)","180"],
-            ["Paneer Special","Paneer Makhani (Half)","150"],["Paneer Special","Paneer Makhani (Full)","250"],["Paneer Special","Shahi Paneer (Half)","150"],["Paneer Special","Shahi Paneer (Full)","250"],["Paneer Special","Kadhai Paneer (Half)","150"],["Paneer Special","Kadhai Paneer (Full)","250"],["Paneer Special","Paneer Butter Masala (Half)","150"],["Paneer Special","Paneer Butter Masala (Full)","250"],["Paneer Special","Palak Paneer (Half)","150"],["Paneer Special","Palak Paneer (Full)","250"],["Paneer Special","Mutter Paneer (Half)","150"],["Paneer Special","Mutter Paneer (Full)","200"],
-            ["Chicken","Butter Chicken (Half)","350"],["Chicken","Butter Chicken (Full)","599"],["Chicken","Chicken Tikka Masala (Half)","350"],["Chicken","Chicken Tikka Masala (Full)","599"],["Chicken","Kadhai Chicken (Half)","350"],["Chicken","Kadhai Chicken (Full)","599"],["Chicken","Chicken Curry (Half)","350"],["Chicken","Chicken Curry (Full)","550"],["Chicken","Egg Masala (Half)","150"],["Chicken","Egg Masala (Full)","299"],
-            ["Starters (Non-Veg)","Chicken 65","250"],["Starters (Non-Veg)","Chicken Lollypop","250"],
-            ["Breads","Tawa Roti","12"],["Breads","Butter Tawa Roti","15"],["Breads","Naan","25"],["Breads","Butter Naan","30"],["Breads","Butter Garlic Naan","45"],
-            ["Rice","Plain Rice","100"],["Rice","Jeera Rice","120"],["Rice","Fried Rice","120"],["Rice","Veg Pulao","180"],["Rice","Veg Biryani","199"],["Rice","Chicken Biryani","299"],
-            ["Desi Drinks","Namkeen Lassi","40"],["Desi Drinks","Sweet Lassi","80"],["Desi Drinks","Plain Dahi","30"],["Desi Drinks","Mix Raita","80"],
-            ["Soups","Tomato Soup","120"],["Soups","Vegetable Soup","120"],["Soups","Chicken Soup","180"],["Soups","Hot & Sour Soup (Veg)","130"],
-            ["Thali","Veg Thali","199"],["Thali","Special Veg Thali","250"],["Thali","Non-Veg Thali","350"],
-            ["Cold Beverages","Fresh Lemonade","150"],["Cold Beverages","Virgin Mojito","80"],["Cold Beverages","Vanilla Shake","120"],["Cold Beverages","Strawberry Shake","120"]
+            ["Main Course (Veg)","Dal Makhani (Half)","150"],["Main Course (Veg)","Dal Makhani (Full)","250"],["Main Course (Veg)","Dal Fry (Half)","120"],["Main Course (Veg)","Dal Fry (Full)","200"],["Main Course (Veg)","Mix Veg (Half)","150"],["Main Course (Veg)","Mix Veg (Full)","200"],["Main Course (Veg)","Aaloo Gobhi (Half)","150"],["Main Course (Veg)","Aaloo Gobhi (Full)","200"],
+            ["Paneer Special","Paneer Makhani (Half)","150"],["Paneer Special","Paneer Makhani (Full)","250"],["Paneer Special","Shahi Paneer (Half)","150"],["Paneer Special","Shahi Paneer (Full)","250"],["Paneer Special","Kadhai Paneer (Half)","150"],["Paneer Special","Kadhai Paneer (Full)","250"],["Paneer Special","Paneer Butter Masala (Half)","150"],["Paneer Special","Paneer Butter Masala (Full)","250"],["Paneer Special","Palak Paneer (Half)","150"],["Paneer Special","Palak Paneer (Full)","250"],
+            ["Chicken","Butter Chicken (Half)","350"],["Chicken","Butter Chicken (Full)","599"],["Chicken","Chicken Tikka Masala (Half)","350"],["Chicken","Chicken Tikka Masala (Full)","599"],["Chicken","Kadhai Chicken (Half)","350"],["Chicken","Kadhai Chicken (Full)","599"],["Chicken","Chicken Curry (Half)","350"],["Chicken","Chicken Curry (Full)","550"],
+            ["Breads","Tawa Roti","12"],["Breads","Butter Roti","15"],["Breads","Naan","25"],["Breads","Butter Naan","30"],["Breads","Garlic Naan","45"],
+            ["Rice","Plain Rice","100"],["Rice","Jeera Rice","120"],["Rice","Fried Rice","120"],["Rice","Veg Biryani","199"],["Rice","Chicken Biryani","299"],
+            ["Desi Drinks","Lassi","40"],["Desi Drinks","Sweet Lassi","80"],["Desi Drinks","Raita","80"],
+            ["Soups","Tomato Soup","120"],["Soups","Veg Soup","120"],["Soups","Chicken Soup","180"],
+            ["Thali","Veg Thali","199"],["Thali","Special Veg Thali","250"],["Thali","Non-Veg Thali","350"]
         ];
-        
-        function getLocation() {
+
+        let cart = {};
+        let location = '';
+        let allItems = menu;
+        let filteredItems = menu;
+
+        function init() {
             const params = new URLSearchParams(window.location.search);
-            return params.get('loc') || 'Unknown';
+            location = params.get('loc') || 'Unknown';
+            document.getElementById('locationBadge').textContent = location;
+            renderMenu();
         }
-        
-        function displayMenu() {
-            const menuSection = document.getElementById('menuSection');
-            let currentCategory = '';
+
+        function renderMenu() {
             let html = '';
-
-            menuData.forEach((item, index) => {
-                const [category, name, price] = item;
-                
-                if (category !== currentCategory) {
-                    currentCategory = category;
-                    html += `<div class="category-title">${category}</div>`;
+            let currentCat = '';
+            
+            filteredItems.forEach((item, i) => {
+                if (item[0] !== currentCat) {
+                    currentCat = item[0];
+                    html += `<div class="category-title">${currentCat}</div>`;
                 }
-
                 html += `
                     <div class="menu-item">
-                        <div class="item-info">
-                            <div class="item-name">${name}</div>
-                        </div>
-                        <div class="item-price">₹${price}</div>
-                        <div class="quantity-control">
-                            <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
-                            <div class="qty-display" id="qty-${index}">0</div>
-                            <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                        <div class="item-name">${item[1]}</div>
+                        <div class="item-price">₹${item[2]}</div>
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="changeQty(${i}, -1)">-</button>
+                            <div class="qty-display" id="q${i}">0</div>
+                            <button class="qty-btn" onclick="changeQty(${i}, 1)">+</button>
                         </div>
                     </div>
                 `;
             });
-
-            menuSection.innerHTML = html;
+            
+            document.getElementById('menuSection').innerHTML = html;
         }
-        
-        function updateQuantity(index, change) {
-            const item = menuData[index];
-            const key = `${item[1]}-${item[2]}`;
+
+        function changeQty(idx, delta) {
+            const item = filteredItems[idx];
+            const key = item[1];
             
             if (!cart[key]) {
-                cart[key] = { name: item[1], price: parseInt(item[2]), quantity: 0 };
+                cart[key] = {name: item[1], price: parseInt(item[2]), qty: 0};
             }
             
-            cart[key].quantity += change;
+            cart[key].qty += delta;
             
-            if (cart[key].quantity <= 0) {
+            if (cart[key].qty <= 0) {
                 delete cart[key];
-                document.getElementById(`qty-${index}`).textContent = '0';
+                document.getElementById('q' + idx).textContent = '0';
             } else {
-                document.getElementById(`qty-${index}`).textContent = cart[key].quantity;
+                document.getElementById('q' + idx).textContent = cart[key].qty;
             }
             
             updateTotal();
         }
-        
+
         function updateTotal() {
             let total = 0;
-            let itemCount = 0;
-            Object.values(cart).forEach(item => {
-                total += item.price * item.quantity;
-                itemCount += item.quantity;
-            });
+            let count = 0;
             
-            document.getElementById('totalAmount').textContent = `₹${total}`;
-            document.getElementById('itemCount').textContent = `${itemCount} items`;
-            document.getElementById('placeOrderBtn').disabled = total === 0;
+            for (let k in cart) {
+                total += cart[k].price * cart[k].qty;
+                count += cart[k].qty;
+            }
+            
+            document.getElementById('totalAmount').textContent = '₹' + total;
+            document.getElementById('itemCount').textContent = count;
+            document.getElementById('orderBtn').disabled = (total === 0);
         }
-        
+
         function placeOrder() {
-            const orderItems = Object.values(cart).map(item => 
-                `${item.name} x${item.quantity}`
-            ).join(', ');
+            let items = [];
+            for (let k in cart) {
+                items.push(`${cart[k].name} x${cart[k].qty}`);
+            }
             
-            const total = Object.values(cart).reduce((sum, item) => 
-                sum + (item.price * item.quantity), 0
-            );
-            
+            const total = Object.values(cart).reduce((s, i) => s + (i.price * i.qty), 0);
             const orderId = 'ORD' + Date.now();
             
             const orders = JSON.parse(localStorage.getItem('dreamHotelOrders') || '[]');
             orders.push({
                 orderId,
                 location,
-                items: orderItems,
+                items: items.join(', '),
                 total,
-                notes: document.getElementById('customerNotes').value,
+                notes: document.getElementById('notes').value,
                 timestamp: new Date().toLocaleString('en-IN'),
                 status: 'New'
             });
             localStorage.setItem('dreamHotelOrders', JSON.stringify(orders));
             
-            document.getElementById('orderIdText').textContent = `Order ID: ${orderId}`;
-            document.getElementById('successModal').style.display = 'flex';
+            document.getElementById('orderId').textContent = 'Order ID: ' + orderId;
+            document.getElementById('modal').style.display = 'flex';
         }
-        
+
         function resetOrder() {
             cart = {};
-            document.getElementById('customerNotes').value = '';
+            document.getElementById('notes').value = '';
             document.querySelectorAll('.qty-display').forEach(el => el.textContent = '0');
             updateTotal();
-            document.getElementById('successModal').style.display = 'none';
+            document.getElementById('modal').style.display = 'none';
         }
-        
+
         document.getElementById('searchInput').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            if (searchTerm === '') {
-                menuData = allMenuItems;
+            const term = e.target.value.toLowerCase();
+            if (term === '') {
+                filteredItems = allItems;
             } else {
-                menuData = allMenuItems.filter(item => 
-                    item[1].toLowerCase().includes(searchTerm) || 
-                    item[0].toLowerCase().includes(searchTerm)
+                filteredItems = allItems.filter(item => 
+                    item[1].toLowerCase().includes(term) || item[0].toLowerCase().includes(term)
                 );
             }
-            displayMenu();
+            renderMenu();
         });
-        
-        window.onload = function() {
-            location = getLocation();
-            document.getElementById('locationBadge').textContent = location;
-            allMenuItems = MENU;
-            menuData = MENU;
-            displayMenu();
-        };
+
+        window.onload = init;
     </script>
 </body>
 </html>

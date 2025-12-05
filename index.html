@@ -244,26 +244,34 @@
         </div>
     </div>
     <script>
-        const SHEET_ID = '1ugj0kHUnr8DqVnrNefE8HKYO5i47Jr0-mBUiAJgp-Ns';
-        const API_KEY = 'AIzaSyBSLh6l4ShYPkNfJCRdLmkW0ufGZpKVZXo';
         let cart = {}, location = '', menuData = [], allMenuItems = [];
+        
+        // Complete menu data embedded
+        const MENU = [
+            ["Breakfast","Tandoori Prantha","60"],["Breakfast","Laccha Parantha","30"],["Breakfast","Masala Laccha Parantha","60"],["Breakfast","Laal Mirch Parantha","60"],["Breakfast","Aaloo Parantha","60"],["Breakfast","Pyaz Parantha","60"],["Breakfast","Gobhi Parantha","60"],["Breakfast","Paneer Parantha","80"],["Breakfast","Mix Parantha","80"],["Breakfast","Plain Parantha","20"],["Breakfast","Aaloo Pyaz Parantha","60"],["Breakfast","Gobhi Pyaz Parantha","60"],["Breakfast","Aaloo Methi Parantha","60"],["Breakfast","Paneer Pyaz Parantha","80"],["Breakfast","Aaloo Pyaz Paneer Parantha","80"],["Breakfast","Methi Prantha","60"],["Breakfast","Mooli Prantha","60"],["Breakfast","Veg Sandwich","120"],["Breakfast","Grilled Sandwich","150"],["Breakfast","Butter Toast","80"],["Breakfast","Bread Toast","80"],["Breakfast","Bread Omlette","150"],["Breakfast","Bread Pakoda","150"],["Breakfast","Poha","120"],["Breakfast","Pudi Bhaji","150"],["Breakfast","Pasta","150"],["Breakfast","Creamy Cheese Pasta","180"],["Breakfast","Red Olive Pasta","150"],["Breakfast","Masala Omlette","150"],["Breakfast","Boiled Egg","50"],["Breakfast","Maggie","100"],["Breakfast","Chole Bhature","150"],
+            ["Beverages","Coffee","50"],["Beverages","Black Tea","30"],["Beverages","Green Tea","30"],["Beverages","Milk Tea","30"],["Beverages","Lemon Tea","30"],["Beverages","Cold Coffee","80"],
+            ["Starters (Veg)","Peanut Masala","150"],["Starters (Veg)","Crispy Corn","199"],["Starters (Veg)","Hara Bhara Kebab","199"],["Starters (Veg)","Chilli Potato","180"],["Starters (Veg)","Honey Chilli Potato","199"],["Starters (Veg)","Veg Manchurian","199"],["Starters (Veg)","Chilli Paneer","250"],["Starters (Veg)","Finger Chips","150"],["Starters (Veg)","Egg Bhuji (2 Pcs)","150"],["Starters (Veg)","Masala Papad (1 Pc)","60"],["Starters (Veg)","Plain Papad (1 Pc)","20"],["Starters (Veg)","Aaloo Chat","199"],["Starters (Veg)","Roasted Peanut","150"],["Starters (Veg)","Mix Pakoda","250"],["Starters (Veg)","Paneer Pakora","250"],["Starters (Veg)","Crispy Paneer","250"],["Starters (Veg)","Chana Masala","150"],["Starters (Veg)","Egg Fry (2 Pcs)","150"],["Starters (Veg)","Sweet Corn","180"],["Starters (Veg)","Masala French Fries","180"],["Starters (Veg)","Paneer Manchurian","250"],["Starters (Veg)","Gobi Manchurian","250"],["Starters (Veg)","Spring Roll","199"],["Starters (Veg)","Potato Rolls","199"],["Starters (Veg)","Dahi Ke Sholey","250"],["Starters (Veg)","Paneer 65","250"],["Starters (Veg)","Chili Baby Corn","250"],["Starters (Veg)","Cheese Balls","250"],
+            ["Drinks","Red Bull","200"],["Drinks","Water Bottle","30"],["Drinks","Lemon Water","50"],["Drinks","Ozito Water","80"],["Drinks","Sipp","100"],["Drinks","Caffine Shot","100"],["Drinks","Soda","50"],["Drinks","Cold Drinks","50"],
+            ["Tandoori (Veg)","Garlic Potato Shots","399"],["Tandoori (Veg)","Masala Chaap","399"],["Tandoori (Veg)","Malai Chaap","399"],["Tandoori (Veg)","Tandoori Chaap","399"],["Tandoori (Veg)","Mushroom Tikka","399"],["Tandoori (Veg)","Paneer Tikka","399"],["Tandoori (Veg)","Afghani Chaap","399"],["Tandoori (Veg)","Pahadi Chaap","299"],["Tandoori (Veg)","Rajma Kabab","299"],["Tandoori (Veg)","Palak Channa Kabaab","350"],["Tandoori (Veg)","Veg Seekh Kabaab","350"],["Tandoori (Veg)","Lehsooni Paneer Tikka","399"],["Tandoori (Veg)","Achari Paneer Tikka","299"],["Tandoori (Veg)","Malai Paneer Tikka","350"],["Tandoori (Veg)","Afghani Paneer Tikka","199"],["Tandoori (Veg)","Malai Mushroom","250"],
+            ["Tandoori (Non-Veg)","Lehsooni Chicken Tikka","150"],["Tandoori (Non-Veg)","Kastoori Chicken Tikka","250"],["Tandoori (Non-Veg)","Afghani Chicken Tikka","280"],["Tandoori (Non-Veg)","Pahadi Chicken Tikka","280"],["Tandoori (Non-Veg)","Malai Chicken Tikka","250"],["Tandoori (Non-Veg)","Malai Chicken Kabaab","250"],["Tandoori (Non-Veg)","Tandoori Chicken","250"],["Tandoori (Non-Veg)","Chicken Seekh","250"],["Tandoori (Non-Veg)","Chilly Chicken","250"],["Tandoori (Non-Veg)","Chicken Pakoda","250"],["Tandoori (Non-Veg)","Chilly Garlic Chicken","250"],["Tandoori (Non-Veg)","Chicken Fry","250"],["Tandoori (Non-Veg)","Chicken Manchurian","250"],["Tandoori (Non-Veg)","Schezwan Chilly Chicken","250"],
+            ["Noodles","Veg Noodles","180"],["Noodles","Egg Noodles","180"],["Noodles","Chicken Noodles","180"],["Noodles","Chowmein","180"],["Noodles","Hakka Noodles","180"],["Noodles","Chilli Garlic Noodles","180"],["Noodles","Chilli Paneer Noodles","250"],["Noodles","Schezwan Noodles","200"],["Noodles","Chicken Hakka Noodles","250"],["Noodles","Chicken Chili Garlic Noodles","250"],["Noodles","Chicken Schezwan Noodles","250"],["Noodles","Chicken Manchurian Noodles","250"],
+            ["Sandwiches","Cheese Corn Sandwich","150"],["Sandwiches","Veg Masala Sandwich","150"],["Sandwiches","Paneer Masala Sandwich","150"],
+            ["Combos","Manchurian Gravy + Fried Rice","300"],["Combos","Spring Rolls + Fried Rice","300"],
+            ["Main Course (Veg)","Tawa Chaap Masala (Half)","150"],["Main Course (Veg)","Tawa Chaap Masala (Full)","250"],["Main Course (Veg)","Dal Makhani (Half)","150"],["Main Course (Veg)","Dal Makhani (Full)","250"],["Main Course (Veg)","Dal Fry (Half)","120"],["Main Course (Veg)","Dal Fry (Full)","200"],["Main Course (Veg)","Mix Veg (Half)","150"],["Main Course (Veg)","Mix Veg (Full)","200"],["Main Course (Veg)","Aaloo Gobhi (Half)","150"],["Main Course (Veg)","Aaloo Gobhi (Full)","200"],["Main Course (Veg)","Dal Tadka (Half)","150"],["Main Course (Veg)","Dal Tadka (Full)","180"],
+            ["Paneer Special","Paneer Makhani (Half)","150"],["Paneer Special","Paneer Makhani (Full)","250"],["Paneer Special","Shahi Paneer (Half)","150"],["Paneer Special","Shahi Paneer (Full)","250"],["Paneer Special","Kadhai Paneer (Half)","150"],["Paneer Special","Kadhai Paneer (Full)","250"],["Paneer Special","Paneer Butter Masala (Half)","150"],["Paneer Special","Paneer Butter Masala (Full)","250"],["Paneer Special","Palak Paneer (Half)","150"],["Paneer Special","Palak Paneer (Full)","250"],["Paneer Special","Mutter Paneer (Half)","150"],["Paneer Special","Mutter Paneer (Full)","200"],
+            ["Chicken","Butter Chicken (Half)","350"],["Chicken","Butter Chicken (Full)","599"],["Chicken","Chicken Tikka Masala (Half)","350"],["Chicken","Chicken Tikka Masala (Full)","599"],["Chicken","Kadhai Chicken (Half)","350"],["Chicken","Kadhai Chicken (Full)","599"],["Chicken","Chicken Curry (Half)","350"],["Chicken","Chicken Curry (Full)","550"],["Chicken","Egg Masala (Half)","150"],["Chicken","Egg Masala (Full)","299"],
+            ["Starters (Non-Veg)","Chicken 65","250"],["Starters (Non-Veg)","Chicken Lollypop","250"],
+            ["Breads","Tawa Roti","12"],["Breads","Butter Tawa Roti","15"],["Breads","Naan","25"],["Breads","Butter Naan","30"],["Breads","Butter Garlic Naan","45"],
+            ["Rice","Plain Rice","100"],["Rice","Jeera Rice","120"],["Rice","Fried Rice","120"],["Rice","Veg Pulao","180"],["Rice","Veg Biryani","199"],["Rice","Chicken Biryani","299"],
+            ["Desi Drinks","Namkeen Lassi","40"],["Desi Drinks","Sweet Lassi","80"],["Desi Drinks","Plain Dahi","30"],["Desi Drinks","Mix Raita","80"],
+            ["Soups","Tomato Soup","120"],["Soups","Vegetable Soup","120"],["Soups","Chicken Soup","180"],["Soups","Hot & Sour Soup (Veg)","130"],
+            ["Thali","Veg Thali","199"],["Thali","Special Veg Thali","250"],["Thali","Non-Veg Thali","350"],
+            ["Cold Beverages","Fresh Lemonade","150"],["Cold Beverages","Virgin Mojito","80"],["Cold Beverages","Vanilla Shake","120"],["Cold Beverages","Strawberry Shake","120"]
+        ];
         
         function getLocation() {
             const params = new URLSearchParams(window.location.search);
             return params.get('loc') || 'Unknown';
-        }
-        
-        async function loadMenu() {
-            try {
-                const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Menu!A2:C500?key=${API_KEY}`);
-                const data = await response.json();
-                allMenuItems = data.values || [];
-                menuData = allMenuItems;
-                displayMenu();
-            } catch (error) {
-                console.error('Error loading menu:', error);
-                document.getElementById('menuSection').innerHTML = '<p style="padding: 20px; text-align: center;">Error loading menu. Please refresh.</p>';
-            }
         }
         
         function displayMenu() {
@@ -280,7 +288,7 @@
                 }
 
                 html += `
-                    <div class="menu-item" data-name="${name.toLowerCase()}">
+                    <div class="menu-item">
                         <div class="item-info">
                             <div class="item-name">${name}</div>
                         </div>
@@ -381,7 +389,9 @@
         window.onload = function() {
             location = getLocation();
             document.getElementById('locationBadge').textContent = location;
-            loadMenu();
+            allMenuItems = MENU;
+            menuData = MENU;
+            displayMenu();
         };
     </script>
 </body>
